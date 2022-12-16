@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section>
+        <nav id="nav1">
+            <div id="name"><i class="fa-solid fa-wallet wall"></i>Bishop</div>
+            <ul id="ul1">
+                <li><a class="show" href="">Currency converter</a></li>
+                <li><a class="hide" href="">cross rates</a></li>
+                <li><a class="hide" href="">Money transfer</a></li>
+            </ul>
+
+            <ul id="ul2">
+                <li><a class="hide" href=""><i class="fa-regular fa-star star"></i>Rate us</a></li>
+                <!-- <li><a href=""></a></li> -->
+            </ul>
+        </nav>
+
+        <div id="demo"></div>
+
+        <div id="con">
+            <div id="con1">
+                <h3>Amount</h3>
+                <input id="amount" type="text">
+            </div>
+
+            
+
+            <div class="con">
+                <h3>From Currency</h3>
+                <select onclick="" id="to">
+                </select>
+            </div>
+
+            <div class="cont">
+                <h3>Exchange</h3>
+                <button onclick="convert()"><i class="fa-solid fa-rotate opp"></i> </button>
+            </div>
+
+            <div class="con">
+                <h3>To Currency</h3>
+                <select id="there">
+                    
+                </select>
+            </div>
+
+            <div id="con2">
+                <h3>Result</h3>
+                <input id="output" type="text">
+            </div>
+
+        </div>
+        
+    </section>
+
+
+    <script>
+
+            let to = document.querySelector('#to')
+           
+            // // console.log(to.value)
+            let there = document.querySelector('#there')
+            let amount = document.querySelector('#amount')
+            let output = document.querySelector('#output')
+
+            let value = "";
+            // console.log(to.value)
+            // let check = ""
+
+            // function wassup(){
+            //     let output = document.getElementById('to').value;
+            //     // console.log(output)
+            // }
+            
+            
+
+
+            // dc0177bef2b074d76464d4f7
+          fetch('https://v6.exchangerate-api.com/v6/fb834cab58833f1a484f7cba/latest/USD')
+            .then(function(results){
+           return results.json()
+        }).then(data =>{
+            
+           
+         
+
+            // let check = data.conversion_rates
+            // console.log(check)
+            
+           
+
+            for(let key in data.conversion_rates){
+                value +=  `<option ${key} > ${key}`
+                    
+                // value +=  `<option value="${key} > ${key}</option>`
+                // checks +=  `<option value="${key} > ${key}</option>`
+                
+              
+            }
+            // to.value =
+            to.innerHTML = value
+            // to.value  = checks
+            there.innerHTML= value;  
+            // to.value = "EUR"
+            // console.log(checks)
+            // console.log(to.value)
+            
+            
+            
+
+            
+            // console.log(to.value)
+            // console.log(there.value)
+            // console.log(key)
+
+
+            
+        })
+
+
+        // let amount = document.getElementById('amount').value
+        // console.log(amount)
+       
+        async function convert(){
+    
+        let results = await fetch(`https://v6.exchangerate-api.com/v6/fb834cab58833f1a484f7cba/pair/${to.value}/${there.value}`);
+        let data = await results.json()
+        output.value = amount.value * data.conversion_rate; 
+        console.log(data)
+    
+ 
+}
+// convert()
+        // convert()
+    //     function convert(){
+    //         // https://v6.exchangerate-api.com/v6/dc0177bef2b074d76464d4f7/pair/EUR/GBP/AMOUNT
+    //         //  fetch( `https://v6.exchangerate-api.com/v6/dc0177bef2b074d76464d4f7/pair/USD/EUR`)
+    //          fetch( `https://v6.exchangerate-api.com/v6/dc0177bef2b074d76464d4f7/pair/${to.value}/${there.value}`)
+    //         .then(response => response.json())
+    //         .then(data =>{
+           
+
+          
+             
+    //         output.value = amount.value * data.conversion_rate; 
+        
+    //         console.log(amount.value)
+    //         console.log(output.value)
+    //         console.log(to.value)
+ 
+       
+    //     })
+       
+    // }
+    
+    // convert()
+
+
+    // let newDate = new Date();
+    // let year = newDate.getFullYear();
+    // let month = newDate.getMonth()
+    // let months =['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', "Oct", 'Nov', 'Dec'];
+    // let hours = newDate.getHours()
+    // let minutes = newDate.getMinutes();
+    // let seconds = newDate.getSeconds()
+    // console.log(date)
+
+    setInterval(()=>{
+    let todate= new Date();
+    let hours = todate.getHours();
+    let minutes = todate.getMinutes(); 
+    let seconds= todate.getSeconds()
+    document.getElementById('demo').innerHTML=`${hours}: ${minutes} : ${seconds}`;
+
+
+}, 1000)
+    </script>
+</body>
+</html>
